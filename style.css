@@ -1,4 +1,21 @@
-.oneToNine {
+.button-container {
     background-color: grey;
     color: black;
+    display: flex;
+    border: 2px solid black;
 }
+    .row1 {
+        display: flex;
+    }
+    .row2 {
+        display: flex;
+    }
+    .row3 {
+        display: flex;
+    }
+    .row4 {
+        display: flex;
+    }
+    .row5 {
+        display: flex;
+    }
