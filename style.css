@@ -1,9 +1,17 @@
 .button-container {
     background-color: grey;
     color: black;
-    display: flex;
     border: 2px solid black;
+    margin: 200px;
+    padding: 10px;
+
+
+    /* display: flex;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: center; */
 }
+
     .row1 {
         display: flex;
     }

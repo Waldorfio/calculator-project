@@ -18,3 +18,12 @@ function percent(a, b) {
     ans = a/100;
     return ans;
 }
+
+function storeNumber(number) {
+    outputNo = number.innerHTML;
+    alert(outputNo);
+}
+
+number = document.getElementsByClassName(".number");
+number.addEventListener('click', () => storeNumber(number))
+
