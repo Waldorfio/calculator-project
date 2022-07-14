@@ -1,5 +1,5 @@
 function storeNumber(number, numArr) {
-    noClicked = number.innerHTML;
+    noClicked = number;
     numArr.push(parseInt(noClicked));
     display.innerHTML = numArr.join('');    // Display numArr without any commas
     return numArr
@@ -8,9 +8,16 @@ function storeNumber(number, numArr) {
 let numArr = [];
 display = document.getElementById('display');
 
+// Adding universal keypress detection (to add to display)
+document.addEventListener('keydown', function(event) {
+  for (i=1; i<9+1; i++) {
+    if (event.key == i) {storeNumber(parseInt(i), numArr)};
+  }
+});
+
 for (i=1; i<9+1; i++) {;
   number = document.getElementById('number'+i);
-  number.addEventListener('click', storeNumber.bind(this,number,numArr));
+  number.addEventListener('click', storeNumber.bind(this,number.innerHTML,numArr));
 }
 
 plus = document.getElementById('plus');
