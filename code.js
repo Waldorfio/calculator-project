@@ -1,12 +1,14 @@
+let numArr = [];
+let num3 = [];
+display = document.getElementById('display');
+
+// Function to hold stored numbers
 function storeNumber(number, numArr) {
     noClicked = number;
     numArr.push(parseInt(noClicked));
     display.innerHTML = numArr.join('');    // Display numArr without any commas
     return numArr
 }
-
-let numArr = [];
-display = document.getElementById('display');
 
 // Adding universal keypress detection (to add to display)
 document.addEventListener('keydown', function(event) {
@@ -15,13 +17,14 @@ document.addEventListener('keydown', function(event) {
   }
 });
 
+// Storing the button clicked into memory
 for (i=1; i<9+1; i++) {;
   number = document.getElementById('number'+i);
-  number.addEventListener('click', storeNumber.bind(this,number.innerHTML,numArr));
+  number.addEventListener('click', storeNumber.bind(this, number.innerHTML, numArr));
 }
 
 plus = document.getElementById('plus');
-plus.addEventListener('click', () => holdingFunc(numArr));
+plus.addEventListener('click', () => holdingFunc(numArr, 'plus'));
 
 equals = document.getElementById('equals');
 equals.addEventListener('click', () => equalFunc(num1));
@@ -29,10 +32,13 @@ equals.addEventListener('click', () => equalFunc(num1));
 clear = document.getElementById('clear');
 clear.addEventListener('click', () => acFunc(numArr,num1));
 
-function holdingFunc(numArr) {
+function holdingFunc(numArr, action) {
   num1 = parseInt(numArr.join(''));    // Storing numArr contents
   numArr.length = 0;  // Re-emptying numArr, once contents are stored
   console.log(num1)
+  if (action == 'plus') {
+    num3.push(num1)
+  }
   return num1
 }
 
@@ -40,7 +46,7 @@ function equalFunc(num1, action) {
   action = 'plus';
   if (action == 'plus') {
     num2 = parseInt(numArr.join(''));
-    output = num1 + num2};
+    output = num2 + add(num3)};
   display.innerHTML = output;
   acFunc();
 }
@@ -56,5 +62,13 @@ function acFunc() {
 // function liveUpdate() {
 //   display
 // }
+
+function add(arr) {
+  output = 0;
+  for (i=0; i<(arr.length); i++) {
+    output = output + arr[i];
+  }
+  return output
+}
 
 console.log('-----------')
