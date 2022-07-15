@@ -7,7 +7,9 @@ display.innerHTML = 0;
 // Function to hold stored numbers and parse it
 function storeNumber(number, numArr) {
     noClicked = number;
-    numArr.push(parseInt(noClicked));
+    console.log(numArr)
+    numArr.push(noClicked);
+    console.log(numArr)
     display.innerHTML = numArr.join('');    // Display numArr without any commas
     return numArr
 }
@@ -20,7 +22,7 @@ document.addEventListener('keydown', function(event) {
 });
 
 // Storing the button clicked into memory
-for (i=1; i<9+1; i++) {;
+for (i=0; i<9+1; i++) {;
   number = document.getElementById('number'+i);
   number.addEventListener('click', storeNumber.bind(this, number.innerHTML, numArr));
 }
@@ -34,22 +36,16 @@ multiply = document.getElementById('star');
 multiply.addEventListener('click', () => holdingFunc(numArr, 'multiply'));
 divide = document.getElementById('slash');
 divide.addEventListener('click', () => holdingFunc(numArr, 'divide'));
+
 opposite = document.getElementById('dashminus');
-opposite.addEventListener('click', () => oppositeFunc());
+opposite.addEventListener('click', () => equalFunc(numArr, ['dashminus']));
 percent = document.getElementById('percent');
 percent.addEventListener('click', () => equalFunc(numArr, ['percent']));
 clear = document.getElementById('clear');
 clear.addEventListener('click', () => equalFunc(numArr, ['clear']));
 
-//// TO WORK ON /////////////////////
-function oppositeFunc(numArr) {
-  oppositeNum = parseInt(display.innerText)*-1;
-  display.innerHTML = oppositeNum;
-  // numArr = []
-  numArr.push(parseInt(oppositeNum));
-  // storeNumber(oppositeNum, numArr)
-}
-////////////////////////////
+dot = document.getElementById('dot');
+dot.addEventListener('click', () => storeNumber('.', numArr));
 
 // Adding other eventlisteners
 equals = document.getElementById('equals');
@@ -57,35 +53,39 @@ equals.addEventListener('click', () => equalFunc(num1, action));
 
 // Decide what happens in between operation
 function holdingFunc(numArr, op) {
-  num1 = parseInt(numArr.join(''));    // Storing numArr contents
+  console.log('this is the numArr: '+numArr)
+  num1 = parseFloat(numArr.join(''));    // Storing numArr contents
   numArr.length = 0;  // Re-emptying numArr, once contents are stored
-  console.log(num1)
-  // num1Arr.push(num1)
   action = op;
+}
+
+function clearFunc() {
+  output = 0;
+  numArr.length = 0
+  num1 = 0;
+  num2 = 0;
 }
 
 // Evaluation Function
 function equalFunc(num1, action) {
-  console.log('action='+action)
   // action = 'minus';
   num2 = parseInt(numArr.join(''));
   if (action == 'plus') {output = num1 + num2};
   if (action == 'minus') {output = num1 - num2};
   if (action == 'multiply') {output = num1 * num2};
-  if (action == 'divide') {output = num1 / num2};
+  if (action == 'divide') {
+    output = num1 / num2;
+    if (num2 == 0) {output = 'LOL NOPE.'}
+  };
+  
+  if (action == 'dashminus') {output = -1*num2};
   if (action == 'percent') {output = num2 / 100};
-  if (action == 'clear') {
-    output = 0;
-    numArr.length = 0;
-    // let numArr = []
-    num1 = 0;
-    num2 = 0;
-  }
+  if (action == 'clear') {clearFunc()}
   display.innerHTML = output;
-  console.log(num1 + ' ' + action + ' ' + num2);
-  // action = []
-  // action.length = 0;
+  console.log(num1 + '(num1) ' + action + ' ' + num2 + '(num2) = ' + output + '(output)');
+  numArr[0] = output;
   action = '';
+  return numArr
 }
 
 // Sum of an array function
