@@ -7,9 +7,7 @@ display.innerHTML = 0;
 // Function to hold stored numbers and parse it
 function storeNumber(number, numArr) {
     noClicked = number;
-    console.log(numArr)
     numArr.push(noClicked);
-    console.log(numArr)
     display.innerHTML = numArr.join('');    // Display numArr without any commas
     return numArr
 }
@@ -53,7 +51,6 @@ equals.addEventListener('click', () => equalFunc(num1, action));
 
 // Decide what happens in between operation
 function holdingFunc(numArr, op) {
-  console.log('this is the numArr: '+numArr)
   num1 = parseFloat(numArr.join(''));    // Storing numArr contents
   numArr.length = 0;  // Re-emptying numArr, once contents are stored
   action = op;
@@ -82,7 +79,6 @@ function equalFunc(num1, action) {
   if (action == 'percent') {output = num2 / 100};
   if (action == 'clear') {clearFunc()}
   display.innerHTML = output;
-  console.log(num1 + '(num1) ' + action + ' ' + num2 + '(num2) = ' + output + '(output)');
   numArr[0] = output;
   action = '';
   return numArr
